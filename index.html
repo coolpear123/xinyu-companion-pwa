@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#120d15" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content="独立运行的私人 AI 伙伴 PWA 原型。" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="心语" />
+    <title>心语 · AI 伙伴</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png" />
+    <link rel="apple-touch-icon" href="./assets/icon-192.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell" data-state="idle">
+      <section class="stage" aria-label="角色舞台">
+        <img
+          class="portrait"
+          src="./assets/companion-portrait.png"
+          alt="原创虚构 AI 伙伴角色"
+          width="1024"
+          height="1792"
+        />
+        <div class="stage-shade" aria-hidden="true"></div>
+        <div class="ambient-orb ambient-orb--one" aria-hidden="true"></div>
+        <div class="ambient-orb ambient-orb--two" aria-hidden="true"></div>
+
+        <header class="topbar">
+          <div class="identity">
+            <span class="presence" aria-hidden="true"></span>
+            <div>
+              <p class="eyebrow">私人空间</p>
+              <h1>心语</h1>
+            </div>
+          </div>
+          <button class="glass-button install-button" type="button" hidden>安装到桌面</button>
+        </header>
+
+        <div class="status-card" role="status" aria-live="polite">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span class="status-text">正在陪着你</span>
+        </div>
+
+        <div class="heart-burst" aria-hidden="true">
+          <span>♥</span>
+          <i></i><i></i><i></i>
+        </div>
+
+        <div class="speech-card" aria-live="polite">
+          <p class="speech-name">心语</p>
+          <p class="speech-text">晚上好。先试试让我说话，或者给你比个心。</p>
+          <div class="voice-wave" aria-hidden="true">
+            <b></b><b></b><b></b><b></b><b></b>
+          </div>
+        </div>
+      </section>
+
+      <section class="control-panel" aria-label="原型控制区">
+        <div class="action-strip" role="group" aria-label="动作测试">
+          <button class="action-chip is-active" type="button" data-action="idle">
+            <span class="chip-icon" aria-hidden="true">◌</span>
+            待机
+          </button>
+          <button class="action-chip" type="button" data-action="speaking">
+            <span class="chip-icon" aria-hidden="true">≋</span>
+            说话
+          </button>
+          <button class="action-chip" type="button" data-action="heart">
+            <span class="chip-icon" aria-hidden="true">♥</span>
+            比心
+          </button>
+        </div>
+
+        <form class="composer">
+          <label class="sr-only" for="message">输入想说的话</label>
+          <input id="message" name="message" autocomplete="off" placeholder="和她说点什么…" />
+          <button class="send-button" type="submit" aria-label="发送消息">
+            <span aria-hidden="true">发送</span>
+          </button>
+        </form>
+
+        <p class="prototype-note">当前为离线动作原型，尚未连接 AI 或保存聊天内容。</p>
+      </section>
+    </main>
+
+    <div class="toast" role="status" aria-live="polite" hidden></div>
+    <script src="./app.js" defer></script>
+  </body>
+</html>
