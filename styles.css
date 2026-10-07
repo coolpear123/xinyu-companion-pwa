@@ -64,8 +64,18 @@ button { font: inherit; }
 }
 
 .portrait-video {
+  z-index: 1;
+  opacity: 0;
   background: #201720 url("./assets/companion-portrait.png") center 43% / cover no-repeat;
+  transition: opacity 180ms ease;
 }
+
+.portrait-fallback {
+  z-index: 0;
+  display: block;
+}
+
+.portrait-video.is-playing { opacity: 1; }
 
 .stage-shade {
   position: absolute;

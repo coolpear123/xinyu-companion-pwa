@@ -1,12 +1,11 @@
-const CACHE_NAME = 'xinyu-mobile-shell-v12';
+const CACHE_NAME = 'xinyu-mobile-shell-v13';
 const APP_SHELL = [
   './',
   './index.html',
-  './styles.css?v=12',
-  './config.js?v=12',
-  './app.js?v=12',
+  './styles.css?v=13',
+  './config.js?v=13',
+  './app.js?v=13',
   './manifest.webmanifest',
-  './assets/companion-idle.mp4?v=12',
   './assets/companion-portrait.png',
   './assets/icon-192.png',
   './assets/icon-512.png'
@@ -23,8 +22,6 @@ self.addEventListener('activate', (event) => {
     await Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key)));
     await self.clients.claim();
 
-    const clients = await self.clients.matchAll({ type: 'window', includeUncontrolled: true });
-    await Promise.all(clients.map((client) => client.navigate(client.url).catch(() => null)));
   })());
 });
 

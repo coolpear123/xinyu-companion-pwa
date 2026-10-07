@@ -17,12 +17,23 @@ let pressActive = false;
 let replyInFlight = false;
 let conversationHistory = [];
 
+function ensurePortraitPlayback() {
+  if (!portraitVideo) return Promise.resolve();
+  portraitVideo.muted = true;
+  portraitVideo.defaultMuted = true;
+  portraitVideo.setAttribute('muted', '');
+  portraitVideo.setAttribute('playsinline', '');
+  return portraitVideo.play().catch(() => {
+    portraitVideo.classList.remove('is-playing');
+  });
+}
+
 function setState(nextState) {
   app.dataset.state = nextState;
   if (portraitVideo) {
     const playbackRates = { idle: 1, listening: 0.82, speaking: 1.22, heart: 1.08 };
     portraitVideo.playbackRate = playbackRates[nextState] || 1;
-    if (portraitVideo.paused) portraitVideo.play().catch(() => {});
+    if (portraitVideo.paused) ensurePortraitPlayback();
   }
   window.clearTimeout(resetTimer);
   if (nextState === 'heart') {
@@ -223,13 +234,21 @@ talkButton.addEventListener('pointerup', stopTalking);
 talkButton.addEventListener('pointercancel', stopTalking);
 talkButton.addEventListener('contextmenu', (event) => event.preventDefault());
 
-portraitVideo?.addEventListener('canplay', () => {
-  portraitVideo.muted = true;
-  portraitVideo.play().catch(() => {});
-}, { once: true });
+portraitVideo?.addEventListener('playing', () => {
+  portraitVideo.classList.add('is-playing');
+});
+
+portraitVideo?.addEventListener('error', () => {
+  portraitVideo.classList.remove('is-playing');
+});
+
+portraitVideo?.addEventListener('canplay', ensurePortraitPlayback);
+
+document.addEventListener('pointerdown', ensurePortraitPlayback, { passive: true });
+window.addEventListener('pageshow', ensurePortraitPlayback);
 
 document.addEventListener('visibilitychange', () => {
-  if (!document.hidden && portraitVideo?.paused) portraitVideo.play().catch(() => {});
+  if (!document.hidden && portraitVideo?.paused) ensurePortraitPlayback();
 });
 
 if ('serviceWorker' in navigator) {
