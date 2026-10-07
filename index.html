@@ -13,19 +13,26 @@
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png" />
     <link rel="apple-touch-icon" href="./assets/icon-192.png" />
-    <link rel="stylesheet" href="./styles.css?v=10" />
+    <link rel="stylesheet" href="./styles.css?v=11" />
   </head>
   <body>
     <main class="app-shell" data-state="idle">
       <section class="stage" aria-label="AI 语音伙伴">
         <div class="portrait-rig">
-          <img
-            class="portrait-layer portrait-base"
-            src="./assets/companion-portrait.png"
-            alt="原创虚构 AI 伙伴角色"
-            width="1024"
-            height="1792"
-          />
+          <video
+            class="portrait-layer portrait-video"
+            autoplay
+            muted
+            loop
+            playsinline
+            webkit-playsinline
+            preload="auto"
+            poster="./assets/companion-portrait.png"
+            aria-label="原创虚构 AI 伙伴角色"
+            disablepictureinpicture
+          >
+            <source src="./assets/companion-idle.mp4" type="video/mp4" />
+          </video>
         </div>
         <div class="stage-shade" aria-hidden="true"></div>
 
@@ -45,7 +52,7 @@
     </main>
 
     <div class="toast" role="status" aria-live="polite" hidden></div>
-    <script src="./config.js?v=10"></script>
-    <script src="./app.js?v=10" defer></script>
+    <script src="./config.js?v=11"></script>
+    <script src="./app.js?v=11" defer></script>
   </body>
 </html>

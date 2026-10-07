@@ -1,6 +1,7 @@
 const app = document.querySelector('.app-shell');
 const talkButton = document.querySelector('.talk-button');
 const toast = document.querySelector('.toast');
+const portraitVideo = document.querySelector('.portrait-video');
 const runtimeConfig = window.XINYU_CONFIG || {};
 const isLocalPreview = ['127.0.0.1', 'localhost'].includes(window.location.hostname);
 const chatApiUrl = runtimeConfig.chatApiUrl || (isLocalPreview
@@ -18,6 +19,11 @@ let conversationHistory = [];
 
 function setState(nextState) {
   app.dataset.state = nextState;
+  if (portraitVideo) {
+    const playbackRates = { idle: 1, listening: 0.82, speaking: 1.22, heart: 1.08 };
+    portraitVideo.playbackRate = playbackRates[nextState] || 1;
+    if (portraitVideo.paused) portraitVideo.play().catch(() => {});
+  }
   window.clearTimeout(resetTimer);
   if (nextState === 'heart') {
     resetTimer = window.setTimeout(() => setState('idle'), 2500);
@@ -216,6 +222,15 @@ talkButton.addEventListener('pointerdown', startTalking);
 talkButton.addEventListener('pointerup', stopTalking);
 talkButton.addEventListener('pointercancel', stopTalking);
 talkButton.addEventListener('contextmenu', (event) => event.preventDefault());
+
+portraitVideo?.addEventListener('canplay', () => {
+  portraitVideo.muted = true;
+  portraitVideo.play().catch(() => {});
+}, { once: true });
+
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && portraitVideo?.paused) portraitVideo.play().catch(() => {});
+});
 
 if ('serviceWorker' in navigator) {
   let reloadingForUpdate = false;

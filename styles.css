@@ -48,10 +48,6 @@ button { font: inherit; }
   position: absolute;
   inset: -3.5%;
   overflow: hidden;
-  transform-origin: 52% 35%;
-  animation: portrait-idle 7.2s ease-in-out infinite;
-  will-change: transform;
-  backface-visibility: hidden;
   contain: strict;
 }
 
@@ -62,10 +58,13 @@ button { font: inherit; }
   height: 100%;
   object-fit: cover;
   object-position: center 43%;
-  transform: translateZ(0);
   pointer-events: none;
   user-select: none;
   -webkit-user-drag: none;
+}
+
+.portrait-video {
+  background: #201720 url("./assets/companion-portrait.png") center 43% / cover no-repeat;
 }
 
 .stage-shade {
@@ -204,41 +203,7 @@ button { font: inherit; }
   text-align: center;
 }
 
-.app-shell[data-state="listening"] .portrait-rig {
-  animation: portrait-listening 2.8s ease-in-out infinite;
-}
-
-.app-shell[data-state="speaking"] .portrait-rig {
-  animation: portrait-speaking 1.35s ease-in-out infinite;
-}
-
-.app-shell[data-state="heart"] .portrait-rig {
-  animation: portrait-heart 1.8s ease-in-out infinite;
-}
-
 .app-shell[data-state="heart"] .heart-burst { animation: heart-in 2.25s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-
-@keyframes portrait-idle {
-  0%, 100% { transform: translate3d(-0.12%, 0.05%, 0) rotate(-0.08deg) scale(1.008); }
-  48% { transform: translate3d(0.2%, -0.34%, 0) rotate(0.12deg) scale(1.028); }
-  58% { transform: translate3d(0.16%, -0.28%, 0) rotate(0.09deg) scale(1.024); }
-}
-
-@keyframes portrait-listening {
-  0%, 100% { transform: translate3d(0.35%, 0.12%, 0) rotate(0.22deg) scale(1.022); }
-  50% { transform: translate3d(0.68%, -0.14%, 0) rotate(0.48deg) scale(1.044); }
-}
-
-@keyframes portrait-speaking {
-  0%, 100% { transform: translate3d(-0.14%, 0.02%, 0) rotate(-0.1deg) scale(1.02); }
-  36% { transform: translate3d(0.2%, -0.2%, 0) rotate(0.14deg) scale(1.035); }
-  70% { transform: translate3d(0.04%, 0.08%, 0) rotate(-0.05deg) scale(1.026); }
-}
-
-@keyframes portrait-heart {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(0) scale(1.026); }
-  50% { transform: translate3d(0.24%, -0.45%, 0) rotate(0.28deg) scale(1.05); }
-}
 
 @keyframes heart-in {
   0% { opacity: 0; transform: translate(-50%, 18px) scale(0.35) rotate(-9deg); }
@@ -263,6 +228,4 @@ button { font: inherit; }
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
-
-  .portrait-rig { animation-duration: 9.4s; }
 }
