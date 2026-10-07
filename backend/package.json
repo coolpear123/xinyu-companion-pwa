@@ -1,0 +1,17 @@
+{
+  "name": "xinyu-companion-api",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "^4.0.86",
+    "ai": "^7.0.130",
+    "zod": "^4.6.5"
+  }
+}
