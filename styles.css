@@ -278,6 +278,95 @@ h1 {
   background: linear-gradient(180deg, #0d090f, #09070b);
 }
 
+.talk-button {
+  position: relative;
+  display: flex;
+  width: 100%;
+  min-height: 76px;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  margin-bottom: 7px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 132, 171, 0.48);
+  border-radius: 24px;
+  color: #fff8fb;
+  background: linear-gradient(145deg, rgba(255, 100, 150, 0.28), rgba(96, 45, 95, 0.38));
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.09), 0 12px 34px rgba(0, 0, 0, 0.2);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: pointer;
+}
+
+.talk-button:active,
+.talk-button.is-recording {
+  border-color: rgba(255, 180, 204, 0.88);
+  background: linear-gradient(145deg, rgba(255, 73, 132, 0.52), rgba(112, 48, 107, 0.56));
+  transform: scale(0.985);
+}
+
+.talk-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 999px;
+  color: #411020;
+  background: linear-gradient(145deg, #ffd3e1, #ff7ca7);
+  box-shadow: 0 0 0 7px rgba(255, 123, 165, 0.1);
+  font-size: 0.72rem;
+}
+
+.talk-copy {
+  display: grid;
+  min-width: 92px;
+  gap: 2px;
+  text-align: left;
+}
+
+.talk-copy strong {
+  font-size: 1rem;
+  font-weight: 720;
+}
+
+.talk-copy small {
+  color: rgba(255, 255, 255, 0.57);
+  font-size: 0.72rem;
+}
+
+.talk-rings {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.talk-rings i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 64px;
+  height: 64px;
+  border: 1px solid rgba(255, 212, 226, 0.42);
+  border-radius: 999px;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.65);
+}
+
+.talk-button.is-recording .talk-rings i {
+  animation: record-ring 1.5s ease-out infinite;
+}
+
+.talk-button.is-recording .talk-rings i:nth-child(2) { animation-delay: 500ms; }
+.talk-button.is-recording .talk-rings i:nth-child(3) { animation-delay: 1000ms; }
+
+.mic-note {
+  margin: 0 0 12px;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.75rem;
+  text-align: center;
+}
+
 .action-strip {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -380,6 +469,74 @@ h1 {
   text-align: center;
 }
 
+.install-dialog {
+  width: min(calc(100% - 28px), 460px);
+  padding: 0;
+  border: 0;
+  border-radius: 26px;
+  color: var(--ink);
+  background: transparent;
+}
+
+.install-dialog::backdrop {
+  background: rgba(5, 3, 6, 0.74);
+  backdrop-filter: blur(8px);
+}
+
+.install-card {
+  position: relative;
+  padding: 26px 22px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 26px;
+  background: linear-gradient(155deg, #241725, #100b13);
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.56);
+}
+
+.dialog-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 1.4rem;
+}
+
+.install-kicker {
+  margin: 0 0 7px;
+  color: #ff9dbc;
+  font-size: 0.78rem;
+  font-weight: 720;
+  letter-spacing: 0.08em;
+}
+
+.install-card h2 {
+  margin: 0 40px 18px 0;
+  font-size: 1.35rem;
+}
+
+.install-steps {
+  display: grid;
+  gap: 11px;
+  margin: 0;
+  padding-left: 1.5rem;
+  color: rgba(255, 255, 255, 0.86);
+  line-height: 1.5;
+}
+
+.install-tip {
+  margin: 18px 0 0;
+  padding: 12px 14px;
+  border-radius: 14px;
+  color: rgba(255, 255, 255, 0.63);
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -437,6 +594,17 @@ h1 {
   18%, 72% { opacity: 1; transform: translate(-50%, 0) scale(1) rotate(0); }
   45% { transform: translate(-50%, -5px) scale(1.12) rotate(4deg); }
   100% { opacity: 0; transform: translate(-50%, -30px) scale(0.86) rotate(7deg); }
+}
+
+@keyframes record-ring {
+  0% { opacity: 0.45; transform: translate(-50%, -50%) scale(0.55); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(2.35); }
+}
+
+@media (max-height: 720px) {
+  .stage { min-height: 61svh; }
+  .speech-card { min-height: 88px; padding-block: 13px; }
+  .action-strip { display: none; }
 }
 
 @media (min-width: 700px) {

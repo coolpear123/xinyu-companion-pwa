@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#120d15" />
     <meta name="color-scheme" content="dark" />
-    <meta name="description" content="独立运行的私人 AI 伙伴 PWA 原型。" />
+    <meta name="description" content="安装到手机桌面的私人 AI 伙伴。" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="心语" />
@@ -37,7 +37,7 @@
               <h1>心语</h1>
             </div>
           </div>
-          <button class="glass-button install-button" type="button" hidden>安装到桌面</button>
+          <button class="glass-button install-button" type="button">安装到桌面</button>
         </header>
 
         <div class="status-card" role="status" aria-live="polite">
@@ -59,7 +59,18 @@
         </div>
       </section>
 
-      <section class="control-panel" aria-label="原型控制区">
+      <section class="control-panel" aria-label="对话控制区">
+        <button class="talk-button" type="button" aria-label="按住说话">
+          <span class="talk-rings" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="talk-icon" aria-hidden="true">●</span>
+          <span class="talk-copy">
+            <strong>按住说话</strong>
+            <small>松开发送</small>
+          </span>
+        </button>
+
+        <p class="mic-note" aria-live="polite">第一次使用会请求麦克风权限</p>
+
         <div class="action-strip" role="group" aria-label="动作测试">
           <button class="action-chip is-active" type="button" data-action="idle">
             <span class="chip-icon" aria-hidden="true">◌</span>
@@ -83,9 +94,23 @@
           </button>
         </form>
 
-        <p class="prototype-note">当前为离线动作原型，尚未连接 AI 或保存聊天内容。</p>
+        <p class="prototype-note">手机端首版 · 语音只在本机测试，尚未连接 AI 后端或保存聊天内容。</p>
       </section>
     </main>
+
+    <dialog class="install-dialog">
+      <form method="dialog" class="install-card">
+        <button class="dialog-close" value="close" aria-label="关闭">×</button>
+        <p class="install-kicker">安装到手机桌面</p>
+        <h2>以后像 App 一样打开</h2>
+        <ol class="install-steps install-steps--ios">
+          <li>点击浏览器底部的“分享”按钮</li>
+          <li>向下找到“添加到主屏幕”</li>
+          <li>点击右上角“添加”</li>
+        </ol>
+        <p class="install-tip">安卓手机请在浏览器菜单中选择“安装应用”或“添加到主屏幕”。</p>
+      </form>
+    </dialog>
 
     <div class="toast" role="status" aria-live="polite" hidden></div>
     <script src="./app.js" defer></script>
