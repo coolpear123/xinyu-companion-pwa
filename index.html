@@ -13,18 +13,36 @@
     <link rel="manifest" href="./manifest.webmanifest" />
     <link rel="icon" type="image/png" sizes="192x192" href="./assets/icon-192.png" />
     <link rel="apple-touch-icon" href="./assets/icon-192.png" />
-    <link rel="stylesheet" href="./styles.css?v=7" />
+    <link rel="stylesheet" href="./styles.css?v=8" />
   </head>
   <body>
     <main class="app-shell" data-state="idle">
       <section class="stage" aria-label="AI 语音伙伴">
-        <img
-          class="portrait"
-          src="./assets/companion-portrait.png"
-          alt="原创虚构 AI 伙伴角色"
-          width="1024"
-          height="1792"
-        />
+        <div class="portrait-rig">
+          <img
+            class="portrait-layer portrait-base"
+            src="./assets/companion-portrait.png"
+            alt="原创虚构 AI 伙伴角色"
+            width="1024"
+            height="1792"
+          />
+          <img
+            class="portrait-layer portrait-face"
+            src="./assets/companion-portrait.png"
+            alt=""
+            aria-hidden="true"
+            width="1024"
+            height="1792"
+          />
+          <img
+            class="portrait-layer portrait-mouth"
+            src="./assets/companion-portrait.png"
+            alt=""
+            aria-hidden="true"
+            width="1024"
+            height="1792"
+          />
+        </div>
         <div class="stage-shade" aria-hidden="true"></div>
         <div class="ambient-orb ambient-orb--one" aria-hidden="true"></div>
         <div class="ambient-orb ambient-orb--two" aria-hidden="true"></div>
@@ -45,7 +63,7 @@
     </main>
 
     <div class="toast" role="status" aria-live="polite" hidden></div>
-    <script src="./config.js?v=7"></script>
-    <script src="./app.js?v=7" defer></script>
+    <script src="./config.js?v=8"></script>
+    <script src="./app.js?v=8" defer></script>
   </body>
 </html>
