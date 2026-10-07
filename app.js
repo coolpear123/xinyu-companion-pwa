@@ -218,8 +218,18 @@ talkButton.addEventListener('pointercancel', stopTalking);
 talkButton.addEventListener('contextmenu', (event) => event.preventDefault());
 
 if ('serviceWorker' in navigator) {
+  let reloadingForUpdate = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (reloadingForUpdate) return;
+    reloadingForUpdate = true;
+    window.location.reload();
+  });
+
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
+    navigator.serviceWorker
+      .register('./sw.js', { updateViaCache: 'none' })
+      .then((registration) => registration.update())
+      .catch(() => {});
   });
 }
 
