@@ -337,9 +337,13 @@ button { font: inherit; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  .heart-burst,
+  .talk-rings i {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
   }
+
+  .portrait-base { animation-duration: 7.8s; }
+  .portrait-face { animation-duration: 9.2s; }
+  .portrait-mouth { animation-duration: 7.8s; }
 }
