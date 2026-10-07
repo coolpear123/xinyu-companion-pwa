@@ -23,7 +23,14 @@ function ensurePortraitPlayback() {
   portraitVideo.defaultMuted = true;
   portraitVideo.setAttribute('muted', '');
   portraitVideo.setAttribute('playsinline', '');
-  return portraitVideo.play().catch(() => {
+  const playback = portraitVideo.play();
+  if (!playback?.then) {
+    portraitVideo.classList.add('is-playing');
+    return Promise.resolve();
+  }
+  return playback.then(() => {
+    portraitVideo.classList.add('is-playing');
+  }).catch(() => {
     portraitVideo.classList.remove('is-playing');
   });
 }
@@ -33,7 +40,7 @@ function setState(nextState) {
   if (portraitVideo) {
     const playbackRates = { idle: 1, listening: 0.82, speaking: 1.22, heart: 1.08 };
     portraitVideo.playbackRate = playbackRates[nextState] || 1;
-    if (portraitVideo.paused) ensurePortraitPlayback();
+    ensurePortraitPlayback();
   }
   window.clearTimeout(resetTimer);
   if (nextState === 'heart') {

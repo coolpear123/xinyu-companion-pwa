@@ -1,10 +1,10 @@
-const CACHE_NAME = 'xinyu-mobile-shell-v13';
+const CACHE_NAME = 'xinyu-mobile-shell-v14';
 const APP_SHELL = [
   './',
   './index.html',
-  './styles.css?v=13',
-  './config.js?v=13',
-  './app.js?v=13',
+  './styles.css?v=14',
+  './config.js?v=14',
+  './app.js?v=14',
   './manifest.webmanifest',
   './assets/companion-portrait.png',
   './assets/icon-192.png',
