@@ -48,10 +48,11 @@ button { font: inherit; }
   position: absolute;
   inset: -3.5%;
   overflow: hidden;
-  transform: translate3d(0, 0, 0) scale(1.01);
   transform-origin: 52% 35%;
-  transition: transform 650ms cubic-bezier(0.22, 1, 0.36, 1), filter 500ms ease;
+  animation: portrait-idle 7.2s ease-in-out infinite;
   will-change: transform;
+  backface-visibility: hidden;
+  contain: strict;
 }
 
 .portrait-layer {
@@ -61,37 +62,10 @@ button { font: inherit; }
   height: 100%;
   object-fit: cover;
   object-position: center 43%;
-  filter: saturate(0.92) contrast(1.03);
+  transform: translateZ(0);
   pointer-events: none;
   user-select: none;
   -webkit-user-drag: none;
-}
-
-.portrait-base {
-  transform-origin: 50% 60%;
-  animation: body-breathe 5.6s ease-in-out infinite;
-}
-
-.portrait-face {
-  z-index: 1;
-  opacity: 0.96;
-  clip-path: ellipse(31% 28% at 52% 31%);
-  -webkit-mask-image: radial-gradient(ellipse 31% 28% at 52% 31%, #000 56%, rgba(0, 0, 0, 0.76) 70%, transparent 100%);
-  mask-image: radial-gradient(ellipse 31% 28% at 52% 31%, #000 56%, rgba(0, 0, 0, 0.76) 70%, transparent 100%);
-  transform-origin: 52% 47%;
-  animation: face-alive 6.8s ease-in-out infinite;
-  will-change: transform;
-}
-
-.portrait-mouth {
-  z-index: 2;
-  opacity: 0.88;
-  clip-path: ellipse(11.5% 4.6% at 53% 38.1%);
-  -webkit-mask-image: radial-gradient(ellipse 11.5% 4.6% at 53% 38.1%, #000 50%, rgba(0, 0, 0, 0.72) 68%, transparent 100%);
-  mask-image: radial-gradient(ellipse 11.5% 4.6% at 53% 38.1%, #000 50%, rgba(0, 0, 0, 0.72) 68%, transparent 100%);
-  transform-origin: 53% 38.1%;
-  animation: mouth-rest 5.6s ease-in-out infinite;
-  will-change: transform;
 }
 
 .stage-shade {
@@ -102,20 +76,6 @@ button { font: inherit; }
     linear-gradient(180deg, transparent 64%, rgba(7, 4, 8, 0.16) 79%, rgba(8, 5, 9, 0.72) 100%);
   pointer-events: none;
 }
-
-.ambient-orb {
-  position: absolute;
-  width: 220px;
-  aspect-ratio: 1;
-  border-radius: 999px;
-  filter: blur(70px);
-  opacity: 0.17;
-  pointer-events: none;
-  transition: opacity 400ms ease, transform 600ms ease;
-}
-
-.ambient-orb--one { top: 15%; left: -130px; background: #ff5c8f; }
-.ambient-orb--two { right: -150px; bottom: 9%; background: #6c42a1; }
 
 .talk-button {
   position: absolute;
@@ -245,78 +205,39 @@ button { font: inherit; }
 }
 
 .app-shell[data-state="listening"] .portrait-rig {
-  transform: translate3d(0.7%, 0.3%, 0) scale(1.045) rotate(0.35deg);
-  filter: saturate(0.98) brightness(1.02);
-}
-
-.app-shell[data-state="listening"] .portrait-face {
-  animation: face-listen 2.4s ease-in-out infinite;
+  animation: portrait-listening 2.8s ease-in-out infinite;
 }
 
 .app-shell[data-state="speaking"] .portrait-rig {
-  transform: translate3d(0, -0.35%, 0) scale(1.035);
-  filter: saturate(1) contrast(1.04) brightness(1.025);
-}
-
-.app-shell[data-state="speaking"] .portrait-face {
-  animation: face-speaking 1.15s ease-in-out infinite;
-}
-
-.app-shell[data-state="speaking"] .portrait-mouth {
-  opacity: 1;
-  animation: mouth-speaking 360ms ease-in-out infinite;
+  animation: portrait-speaking 1.35s ease-in-out infinite;
 }
 
 .app-shell[data-state="heart"] .portrait-rig {
-  transform: translate3d(0, -0.7%, 0) scale(1.055);
-  filter: saturate(1.07) brightness(1.04);
+  animation: portrait-heart 1.8s ease-in-out infinite;
 }
 
-.app-shell[data-state="heart"] .portrait-face {
-  animation: face-heart 1.8s ease-in-out infinite;
-}
-
-.app-shell[data-state="heart"] .ambient-orb { opacity: 0.42; transform: scale(1.2); }
 .app-shell[data-state="heart"] .heart-burst { animation: heart-in 2.25s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 
-@keyframes body-breathe {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  48% { transform: translate3d(0, -0.38%, 0) scale(1.015, 1.011); }
-  55% { transform: translate3d(0, -0.34%, 0) scale(1.013, 1.009); }
+@keyframes portrait-idle {
+  0%, 100% { transform: translate3d(-0.12%, 0.05%, 0) rotate(-0.08deg) scale(1.008); }
+  48% { transform: translate3d(0.2%, -0.34%, 0) rotate(0.12deg) scale(1.028); }
+  58% { transform: translate3d(0.16%, -0.28%, 0) rotate(0.09deg) scale(1.024); }
 }
 
-@keyframes face-alive {
-  0%, 100% { transform: translate3d(-0.18%, 0.08%, 0) rotate(-0.18deg) scale(1.001); }
-  32% { transform: translate3d(0.28%, -0.14%, 0) rotate(0.22deg) scale(1.004); }
-  66% { transform: translate3d(0.04%, 0.14%, 0) rotate(0.06deg) scale(1.002); }
+@keyframes portrait-listening {
+  0%, 100% { transform: translate3d(0.35%, 0.12%, 0) rotate(0.22deg) scale(1.022); }
+  50% { transform: translate3d(0.68%, -0.14%, 0) rotate(0.48deg) scale(1.044); }
 }
 
-@keyframes mouth-rest {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50% { transform: translate3d(0, -0.08%, 0) scale(1.006, 1.012); }
+@keyframes portrait-speaking {
+  0%, 100% { transform: translate3d(-0.14%, 0.02%, 0) rotate(-0.1deg) scale(1.02); }
+  36% { transform: translate3d(0.2%, -0.2%, 0) rotate(0.14deg) scale(1.035); }
+  70% { transform: translate3d(0.04%, 0.08%, 0) rotate(-0.05deg) scale(1.026); }
 }
 
-@keyframes face-listen {
-  0%, 100% { transform: translate3d(0.22%, -0.1%, 0) rotate(0.42deg) scale(1.008); }
-  50% { transform: translate3d(0.52%, 0.12%, 0) rotate(0.74deg) scale(1.013); }
-}
-
-@keyframes face-speaking {
-  0%, 100% { transform: translate3d(-0.14%, 0.03%, 0) rotate(-0.12deg) scale(1.004); }
-  42% { transform: translate3d(0.16%, -0.12%, 0) rotate(0.14deg) scale(1.009); }
-  72% { transform: translate3d(0.02%, 0.08%, 0) rotate(-0.04deg) scale(1.006); }
-}
-
-@keyframes mouth-speaking {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1, 0.92); }
-  32% { transform: translate3d(0.06%, 0.06%, 0) scale(1.018, 1.085); }
-  62% { transform: translate3d(-0.04%, -0.04%, 0) scale(0.994, 0.965); }
-  82% { transform: translate3d(0.03%, 0.04%, 0) scale(1.012, 1.055); }
-}
-
-@keyframes face-heart {
-  0%, 100% { transform: translate3d(0, 0, 0) rotate(0) scale(1.006); }
-  50% { transform: translate3d(0.25%, -0.25%, 0) rotate(0.35deg) scale(1.016); }
+@keyframes portrait-heart {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(0) scale(1.026); }
+  50% { transform: translate3d(0.24%, -0.45%, 0) rotate(0.28deg) scale(1.05); }
 }
 
 @keyframes heart-in {
@@ -343,7 +264,5 @@ button { font: inherit; }
     animation-iteration-count: 1 !important;
   }
 
-  .portrait-base { animation-duration: 7.8s; }
-  .portrait-face { animation-duration: 9.2s; }
-  .portrait-mouth { animation-duration: 7.8s; }
+  .portrait-rig { animation-duration: 9.4s; }
 }
